@@ -5,15 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    private AudioSource playerAudio;
     public float jumpForce;
     public float gravityModifier;
     public bool isOnGround = true;
     public bool gameOver = false;
+    public AudioClip jumpSound;
+    public AudioClip DeathSound;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
     }
 
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
 
     }
@@ -37,6 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             gameOver = true;
             Debug.Log("Game Over...");
+            playerAudio.PlayOneShot(DeathSound, 1.0f);
         }
     }
 }
