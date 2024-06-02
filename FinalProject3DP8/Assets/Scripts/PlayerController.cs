@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static event Action OnPlayerDeath;
     private Rigidbody playerRb;
     private AudioSource playerAudio;
     public float jumpForce;
@@ -14,8 +16,17 @@ public class PlayerController : MonoBehaviour
     public AudioClip DeathSound;
 
     // Start is called before the first frame update
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerDeath += DisablePlayerMovement;
+    }
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerDeath -= DisablePlayerMovement;
+    }
     void Start()
     {
+        EnablePlayerMovement();
         playerRb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
@@ -41,8 +52,16 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
             gameOver = true;
-            Debug.Log("Game Over...");
             playerAudio.PlayOneShot(DeathSound, 1.0f);
+            OnPlayerDeath?.Invoke();
         }
+    }
+    private void DisablePlayerMovement()
+    {
+        Time.timeScale = 0f;
+    }
+    private void EnablePlayerMovement()
+    {
+        Time.timeScale = 1f;
     }
 }
