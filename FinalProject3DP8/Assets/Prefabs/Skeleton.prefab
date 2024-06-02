@@ -1814,6 +1814,7 @@ GameObject:
   - component: {fileID: 1031960994781296521}
   - component: {fileID: 1687966033803676506}
   - component: {fileID: -8914002700182291581}
+  - component: {fileID: -1038977268513520182}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Obstacle
@@ -1919,6 +1920,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6ca899b4ece3a4e9d6d1afe66fbcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1038977268513520182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480775917521188328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8751521b39dbe1e4ba50ac278bccf038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 1
 --- !u!1 &7743305501115207331
 GameObject:
   m_ObjectHideFlags: 0
